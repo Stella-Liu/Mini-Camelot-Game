@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,5 +53,4 @@ public class AI : MonoBehaviour {
 	public void Eval(){
 		//plus value to computer when has more pieces than human and closer to the castle vise versa except value is negative
 	}
-
 }
