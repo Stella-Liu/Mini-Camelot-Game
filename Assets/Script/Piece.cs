@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour {
 	public bool isWhite;
-	public bool hasKilled;
+	public bool hasKilled = false;
 
 	void Killed(){
 		hasKilled = true;

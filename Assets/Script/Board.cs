@@ -6,6 +6,7 @@ public class BoardState{
 	bool isWhiteTurn;
 	int[,] board;
 	float valueNode;
+	public int depth;
 	public BoardState parent;
 	public BoardState[] children;
 }
@@ -15,6 +16,7 @@ public class Board : MonoBehaviour {
 	public Piece blackPrefab;
 	public Tile tilePrefab;
 	int[,] board;
+	GameManager manager;
 
 	public bool isWhiteTurn;
 	//isWhiteTurn = true (Human Plays)
@@ -26,7 +28,8 @@ public class Board : MonoBehaviour {
 	}
 
 	void Update(){
-		
+		if (manager.isWhiteTurn) {
+		}
 	}
 
 	void GenerateBoard(){
@@ -95,36 +98,6 @@ public class Board : MonoBehaviour {
 				Instantiate (tilePrefab, qua4, Quaternion.identity); //black castle
 			}
 		}
-	}
-
-	void ValidMove(){ 
-		//Pieces are allowed to move one square in all directions on the board as long as the spot is empty
-
-		//Jump over one enemy to capture
-		
-	}
-
-	void Capture(){ //Jump Move Obligated whenever possible
-		//find out which specific piece it is that has been captured
-		//piece.killed();
-
-		//check if win by capture if the person capturing 
-		//has more than 2 pieces alive
-		//WinByCapture();
-
-		//check if both players have only 1 piece left
-		//Draw();
-	}
-
-	void WinByCapture()	{
-		//if one side has 0 pieces left && the other side has more than 2 pieces left
-		//we have a winner
-		//display winner
-	}
-
-	void WinByCastle(){
-		//if both squares of the opponent's castle is filled, we have a winner
-		//display winner
 	}
 
 }
