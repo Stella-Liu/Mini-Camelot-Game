@@ -19,7 +19,7 @@ public class AI : MonoBehaviour {
 	//min = human - white
 
 	//AI should check in the order of Capture then Plain move.
-
+	/*
 	public void AlphaBeta(BoardState node){
 		if (node.children.Length == 0) {
 			//return heuristic value of node;
@@ -77,4 +77,5 @@ public class AI : MonoBehaviour {
 	public float Result(BoardState state, float alpha){
 
 	}
+	*/
 }

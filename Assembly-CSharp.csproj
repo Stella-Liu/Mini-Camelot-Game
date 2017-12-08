@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\AI.cs" />
      <Compile Include="Assets\Script\Board.cs" />
+     <Compile Include="Assets\Script\BoardState.cs" />
      <Compile Include="Assets\Script\Drag.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
      <Compile Include="Assets\Script\MainMenu.cs" />
