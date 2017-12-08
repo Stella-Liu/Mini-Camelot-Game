@@ -6,26 +6,23 @@ public class Board : MonoBehaviour {
 	public Piece whitePrefab;
 	public Piece blackPrefab;
 	public Tile tilePrefab;
-	public int[,] board = new int[14,8];
+	public int[,] board;
 	GameManager manager;
-	List<Tile> tiles = new List<Tile>();
-	List<Piece> whitePiece = new List<Piece>();
-	List<Piece> blackPiece = new List<Piece>();
-
-	public bool isWhiteTurn;
-	//isWhiteTurn = true (Human Plays)
-	//isWhiteTurn = false (Computer Plays)
+	List<Tile> tiles;
+	List<Piece> whitePiece;
+	List<Piece> blackPiece;
 
 	void Start(){
+		board = new int[14,8];
+		tiles = new List<Tile>();
+		whitePiece = new List<Piece>();
+		blackPiece = new List<Piece>();
 		GenerateBoard();
 		fillBoardArray ();
 	}
 
 	void Update(){
-		/*
-		if (manager.isWhiteTurn) {
-		}
-		*/
+
 	}
 
 	void GenerateBoard(){

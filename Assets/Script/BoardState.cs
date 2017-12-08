@@ -8,11 +8,10 @@ public class BoardState : MonoBehaviour {
 	int[,] board;
 	float valueNode;
 	int depth;
-	BoardState parent;
-	BoardState[] children;
+	public BoardState parent;
+	public BoardState[] children;
 
 	void Start(){
 		board = GetComponent<Board> ().board;
 	}
-
 }
