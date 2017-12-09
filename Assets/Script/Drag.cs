@@ -8,7 +8,7 @@ public class Drag : MonoBehaviour {
 	Vector2 startPos;
 	Vector2 endPos;
 
-	BoardState board;
+	public BoardState tileState;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +25,7 @@ public class Drag : MonoBehaviour {
 			if (pieceHit) {
 				dragObj = pieceHit.gameObject;
 				startPos = new Vector2 (dragObj.transform.position.x, dragObj.transform.position.y);
+				Debug.Log ("Start:" + startPos.x + ", " + startPos.y); 
 			}
 		}
 		if (dragObj) {
@@ -33,45 +34,81 @@ public class Drag : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) { //when left click mouse is released
 			//snap into center of tile
 			if (dragObj) {
-				float posX = Mathf.Round (dragObj.transform.position.x);
-				float posY = Mathf.Round (dragObj.transform.position.y);
-				if (posX % 2 == 0) {
-					if (dragObj.transform.position.x - posX > 0.5) {
-						posX = posX + 1.0f;
-					} else {
-						posX = posX - 1.0f;
-					}
-				}
-				if (posY % 2 == 0) {
-					if (dragObj.transform.position.y - posY > 0.5) {
-						posY = posY + 1.0f;
-					} else {
-						posY = posY - 1.0f;
-					};
-				}
-				dragObj.transform.position = new Vector3 (posX * 0.8f, posY * 0.8f, 0);
 				endPos = new Vector2 (dragObj.transform.position.x, dragObj.transform.position.y);
-				dragObj = null;
+				float tempX = 0;
+				float tempY = 0;
+
+				//snap into center of tile
+				if (endPos.x > startPos.x + 0.8f) {
+					tempX = startPos.x + 1.6f;
+
+				} else if (endPos.x < startPos.x - 0.8f) {
+					tempX = startPos.x - 1.6f;
+				} else {
+					tempX = startPos.x;
+				}
+
+				if (endPos.x > startPos.y + 0.8f) {
+					tempY = startPos.y + 1.6f;
+				} else if (endPos.y < startPos.y - 0.8f) {
+					tempY = startPos.y - 1.6f;
+				} else {
+					tempY = startPos.y;
+				}
+
+				endPos = new Vector2 (tempX, tempY);
+				Debug.Log("End:" + tempX + ", " + tempY);
+
 				//check if move valid
 				ValidMove ();
+
+				dragObj = null;
 			}
 		}
 	}
 
 	void ValidMove(){ 
+		//Check if tile state
+		//get tiles position x
+		double posX = (double)(endPos.x);
+		//get tiles position y
+		double posY = (double)(endPos.y);
+		//change tiles position to 2d array 
+		int arrX = (int)(0.5 * (posX/0.8) + 3.5);
+		int arrY = (int)(-0.5 * (posY/0.8) + 6.5);
+		//check tile value
+		/* Object reference not set to an instance of an object
+		int tileStatus = tileState.board[arrY, arrX];
+		if (tileStatus == 0) {
+			//tile empty
+			Debug.Log (0);
+		} else if (tileStatus == 1) {
+			//computer
+			Debug.Log (1);
+		} else if (tileStatus == 2) {
+			//human
+			Debug.Log (2);
+		} else {
+			//not part of board
+			Debug.Log (-1);
+		}
+		
+		*/
 		//Pieces are allowed to move one square in all directions on the board as long as the spot is empty
 		float diffXSq = Mathf.Pow ((endPos.x - startPos.x), 2);
 		float diffYSq = Mathf.Pow ((endPos.y - startPos.y), 2);
 		float dist = Mathf.Sqrt (diffXSq + diffYSq);
-		if(dist <= 4){
+		Debug.Log ("Distance: " + dist);
+		/*
+		if(dist >= 1.5 && dist < 3){
 			MovePiece();
 		}
 
 		//Jump over one enemy to capture
-		if(dist > 4){
+		if(dist >= 3 && dist < 4){
 			Capture();
 		}
-
+		*/
 	}
 
 	void MovePiece(){

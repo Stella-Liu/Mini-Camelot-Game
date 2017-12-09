@@ -6,8 +6,8 @@ public class Board : MonoBehaviour {
 	public Piece whitePrefab;
 	public Piece blackPrefab;
 	public Tile tilePrefab;
+
 	public int[,] board;
-	GameManager manager;
 	List<Tile> tiles;
 	List<Piece> whitePiece;
 	List<Piece> blackPiece;

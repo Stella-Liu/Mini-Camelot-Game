@@ -5,13 +5,15 @@ using UnityEngine;
 public class BoardState : MonoBehaviour {
 
 	bool isWhiteTurn;
-	int[,] board;
+	public Board b; 
+	public int[,] board;
 	float valueNode;
 	int depth;
-	public BoardState parent;
+	BoardState parent;
 	public BoardState[] children;
 
 	void Start(){
-		board = GetComponent<Board> ().board;
+		board = new int[14,8];
+		board = b.board;
 	}
 }

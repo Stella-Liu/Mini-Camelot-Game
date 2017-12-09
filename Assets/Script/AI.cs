@@ -18,7 +18,7 @@ public class AI : MonoBehaviour {
 	//min = human - white
 
 	//AI should check in the order of Capture then Plain move.
-
+	/*
 	public void AlphaBeta(BoardState node){
 		if (node.children.Length == 0) {
 			//return heuristic value of node;
@@ -69,11 +69,12 @@ public class AI : MonoBehaviour {
 
 	//evaluation function return value range [-1000,+1000] depending on how 
 	//favorable the board position is to the Max Player or Min player
-	public void Eval(BoardState state){
+	public float Eval(BoardState state){
 		//plus value to computer when has more pieces than human and closer to the castle vise versa except value is negative
 	}
 
 	public float Result(BoardState state, float alpha){
 
 	}
+	*/
 }

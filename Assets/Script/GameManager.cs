@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
 	public bool isWhiteTurn;
-	BoardState state;
+	public BoardState state;
 	AI comp;
 
 	// Use this for initialization
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!isWhiteTurn) {
-			comp.AlphaBeta (state);
+			//comp.AlphaBeta (state);
 		}
 	}
 
