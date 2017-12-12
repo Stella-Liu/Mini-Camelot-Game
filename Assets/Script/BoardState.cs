@@ -10,7 +10,7 @@ public class BoardState : MonoBehaviour {
 	public int[,] board;
 	float valueNode;
 	public int depth;
-	BoardState parent;
+	public BoardState parent;
 	List<BoardState> children;
 
 	private int maxDepth;
@@ -26,6 +26,10 @@ public class BoardState : MonoBehaviour {
 		depth = 0;
 		nodeGen = 1;
 		depthLimit = 1;
+		parent = null;
+		children = new List<BoardState> ();
+
+		//createTree(this.gameObject.GetComponent<BoardState>());
 	}
 
 	void Update(){
@@ -41,7 +45,11 @@ public class BoardState : MonoBehaviour {
 		}
 
 		float bestValue = MaxValue (node, -1000, 1000);
-		//return actions
+		for(int i = 0; i < children.Count; i++){
+			if(bestValue == children[i].Eval(children[i]){
+				//return action
+			}
+		}
 	}
 
 	public float MaxValue(BoardState node, float alpha, float beta){
@@ -119,73 +127,167 @@ public class BoardState : MonoBehaviour {
 		return value;
 	}
 
-	void addChildren(int depth){
-		BoardState temp = new BoardState();
-		temp.board = board;
+	void addChildren(BoardState parent){
 		for (int i = 0; i < 14; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (board [i, j] == 2) {
 					if (board [i + 1, j] == 0 && board [i + 2, j] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
 						temp.board [i, j] = 0;
 						temp.board [i + 1, j] = 2;
-						temp.depth = depth;
-						parent = this.gameObject.GetComponent<BoardState>();
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
 						children.Add (temp);
 						nodeGen++;
 					}
 					if (board [i - 1, j] == 0 && board [i - 2, j] == 0){
+						BoardState temp = new BoardState();
+						temp.board = board;
 						temp.board [i, j] = 0;
 						temp.board [i - 1, j] = 2;
-						temp.depth = depth;
-						parent = this.gameObject.GetComponent<BoardState>();
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
 						children.Add (temp);
 						nodeGen++;
 					}
 					if (board [i, j + 1] == 0 && board [i, j + 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
 						temp.board [i, j] = 0;
 						temp.board [i, j + 1] = 2;
-						temp.depth = depth;
-						parent = this.gameObject.GetComponent<BoardState>();
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
 						children.Add (temp);
 						nodeGen++;
 					}
 					if (board [i, j - 1] == 0 && board [i, j - 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
 						temp.board [i, j] = 0;
 						temp.board [i, j - 1] = 2;
-						temp.depth = depth;
-						parent = this.gameObject.GetComponent<BoardState>();
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
 						children.Add (temp);
 						nodeGen++;
 					}
 					if (board [i + 1, j + 1] == 0 && board [i + 2, j + 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
 						temp.board [i, j] = 0;
 						temp.board [i + 1, j + 1] = 2;
-						temp.depth = depth;
-						parent = this.gameObject.GetComponent<BoardState>();
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
 						children.Add (temp);
 						nodeGen++;
 					}
 					if (board [i + 1, j - 1] == 0 && board [i + 2, j - 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
 						temp.board [i, j] = 0;
 						temp.board [i + 1, j - 1] = 2;
-						temp.depth = depth;
-						parent = this.gameObject.GetComponent<BoardState>();
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
 						children.Add (temp);
 						nodeGen++;
 					}
 					if (board [i - 1, j + 1] == 0 && board [i - 2, j + 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
 						temp.board [i, j] = 0;
 						temp.board [i - 1, j + 1] = 2;
-						temp.depth = depth;
-						parent = this.gameObject.GetComponent<BoardState>();
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
 						children.Add (temp);
 						nodeGen++;
 					}
 					if (board [i - 1, j - 1] == 0 && board [i - 2, j - 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
 						temp.board [i, j] = 0;
 						temp.board [i - 1, j - 1] = 2;
-						temp.depth = depth;
-						parent = this.gameObject.GetComponent<BoardState>();
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
+						children.Add (temp);
+						nodeGen++;
+					}
+					if (board [i + 1, j] == 1 && board [i + 2, j] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
+						temp.board [i, j] = 0;
+						temp.board [i + 1, j] = 2;
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
+						children.Add (temp);
+						nodeGen++;
+					}
+					if (board [i - 1, j] == 1 && board [i - 2, j] == 0){
+						BoardState temp = new BoardState();
+						temp.board = board;
+						temp.board [i, j] = 0;
+						temp.board [i - 1, j] = 2;
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
+						children.Add (temp);
+						nodeGen++;
+					}
+					if (board [i, j + 1] == 1 && board [i, j + 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
+						temp.board [i, j] = 0;
+						temp.board [i, j + 1] = 2;
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
+						children.Add (temp);
+						nodeGen++;
+					}
+					if (board [i, j - 1] == 1 && board [i, j - 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
+						temp.board [i, j] = 0;
+						temp.board [i, j - 1] = 2;
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
+						children.Add (temp);
+						nodeGen++;
+					}
+					if (board [i + 1, j + 1] == 1 && board [i + 2, j + 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
+						temp.board [i, j] = 0;
+						temp.board [i + 1, j + 1] = 2;
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
+						children.Add (temp);
+						nodeGen++;
+					}
+					if (board [i + 1, j - 1] == 1 && board [i + 2, j - 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
+						temp.board [i, j] = 0;
+						temp.board [i + 1, j - 1] = 2;
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
+						children.Add (temp);
+						nodeGen++;
+					}
+					if (board [i - 1, j + 1] == 1 && board [i - 2, j + 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
+						temp.board [i, j] = 0;
+						temp.board [i - 1, j + 1] = 2;
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
+						children.Add (temp);
+						nodeGen++;
+					}
+					if (board [i - 1, j - 1] == 1 && board [i - 2, j - 2] == 0) {
+						BoardState temp = new BoardState();
+						temp.board = board;
+						temp.board [i, j] = 0;
+						temp.board [i - 1, j - 1] = 2;
+						temp.depth = parent.depth+1;
+						temp.parent = parent;
 						children.Add (temp);
 						nodeGen++;
 					}
@@ -194,9 +296,15 @@ public class BoardState : MonoBehaviour {
 		}
 	}
 
-	void createTree(){
-		for (int i = 0; i < depthLimit; i++) {
-			addChildren (i+1);
+	void createTree(BoardState p){
+		parent = p;
+		addChildren (parent);
+	}
+
+	void createChildren(){
+		for(int i = 0; i < children.Count; i ++){
+			children[i].createTree(children[i]);
 		}
-	}*/
+	}
+*/
 }
