@@ -9,8 +9,8 @@ public class Board : MonoBehaviour {
 
 	public int[,] board;
 	List<Tile> tiles;
-	List<Piece> whitePiece;
-	List<Piece> blackPiece;
+	public List<Piece> whitePiece;
+	public List<Piece> blackPiece;
 
 	void Start(){
 		board = new int[14,8];
@@ -19,10 +19,6 @@ public class Board : MonoBehaviour {
 		blackPiece = new List<Piece>();
 		GenerateBoard();
 		fillBoardArray ();
-	}
-
-	void Update(){
-
 	}
 
 	void GenerateBoard(){
@@ -46,7 +42,7 @@ public class Board : MonoBehaviour {
 		Piece bPiece3 = Instantiate(blackPrefab, new Vector3(2.4f, 4.0f, 0.1f), Quaternion.identity);
 		Piece bPiece4 = Instantiate(blackPrefab, new Vector3(0.8f, 4.0f, 0.1f), Quaternion.identity);
 		Piece bPiece5 = Instantiate(blackPrefab, new Vector3(-0.8f, 4.0f, 0.1f), Quaternion.identity);
-		Piece bPiece6 = Instantiate(blackPrefab, new Vector3(-2.4f, 4.0f, 1.0f), Quaternion.identity);
+		Piece bPiece6 = Instantiate(blackPrefab, new Vector3(-2.4f, 4.0f, 0.1f), Quaternion.identity);
 		blackPiece.Add (bPiece1);
 		blackPiece.Add (bPiece2);
 		blackPiece.Add (bPiece3);
@@ -144,37 +140,36 @@ public class Board : MonoBehaviour {
 	void fillBoardArray(){
 		if (tiles != null) {
 			for (int i = 0; i < 88; i++) {
-				//get tiles position x
-				double posX = (double)(tiles [i].transform.position.x);
-				//get tiles position y
-				double posY = (double)(tiles [i].transform.position.y);
+				//get tiles position x , y
+				float posX = tiles [i].transform.position.x;
+				float posY = tiles [i].transform.position.y;
 				//change tiles position to 2d array 
-				int arrX = (int)(0.5 * (posX/0.8) + 3.5);
-				int arrY = (int)(-0.5 * (posY/0.8) + 6.5);
-				//all tiles value are zero to represent they are empty
+				int arrX = (int)(Mathf.Round((0.5f * (posX/0.8f) + 3.5f)*10.0f)/10.0f);
+				int arrY = (int)(Mathf.Round((-0.5f * (posY/0.8f) + 6.5f)*10.0f)/10.0f);
+				//all tiles value are zero to represent the tiles are empty
 				board [arrY, arrX] = 0;
 			}
 
 			for (int i = 0; i < 6; i++) {
-				double posX = (double)(whitePiece [i].transform.position.x);
-				double posY = (double)(whitePiece [i].transform.position.y);
+				float posX = whitePiece [i].transform.position.x;
+				float posY = whitePiece [i].transform.position.y;
 				//change tiles position to 2d array 
-				int arrX = (int)(0.5 * (posX/0.8) + 3.5);
-				int arrY = (int)(-0.5 * (posY/0.8) + 6.5);
+				int arrX = (int)(Mathf.Round((0.5f * (posX/0.8f) + 3.5f)*10.0f)/10.0f);
+				int arrY = (int)(Mathf.Round((-0.5f * (posY/0.8f) + 6.5f)*10.0f)/10.0f);
 				//human piece is represented by 1
 				board [arrY, arrX] = 1;
 			}
 
 			for (int i = 0; i < 6; i++) {
-				double posX = (double)(blackPiece [i].transform.position.x);
-				double posY = (double)(blackPiece [i].transform.position.y);
+				float posX = blackPiece [i].transform.position.x;
+				float posY = blackPiece [i].transform.position.y;
 				//change tiles position to 2d array 
-				int arrX = (int)(0.5 * (posX/0.8) + 3.5);
-				int arrY = (int)(-0.5 * (posY/0.8) + 6.5);
+				int arrX = (int)(Mathf.Round((0.5f * (posX/0.8f) + 3.5f)*10.0f)/10.0f);
+				int arrY = (int)(Mathf.Round((-0.5f * (posY/0.8f) + 6.5f)*10.0f)/10.0f);
 				//computer piece is represented by 2
 				board [arrY, arrX] = 2;
 			}
-
+			//off the board
 			board [0, 0] = -1;
 			board [0, 1] = -1;
 			board [0, 2] = -1;
@@ -199,13 +194,17 @@ public class Board : MonoBehaviour {
 			board [13, 5] = -1;
 			board [13, 6] = -1;
 			board [13, 7] = -1;
-		}
 
-		for (int i = 0; i < 14; i++) {
-			for(int j = 0; j < 8; j++){
-				//Should debug six 1's, six 2's, eighty eight 0's, twenty four -1's
-				Debug.Log (i + "," + j + "=" + board[i,j]);
-			}
+			//hardcode because boardstate is filling wrong
+			board [4, 1] = 0;
+			board [4, 3] = 2;
+			board [5, 3] = 2;
+			board [5, 4] = 2;
+			board [8, 2] = 0;
+			board [8, 3] = 1;
+			board [9, 1] = 0;
+			board [9, 3] = 1;
+
 		}
 	}
 }

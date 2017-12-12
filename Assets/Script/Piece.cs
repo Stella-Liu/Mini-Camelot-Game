@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour {
 	public bool isWhite;
-	public bool hasKilled = false;
+	public bool isKilled = false;
 
-	void Killed(){
-		hasKilled = true;
-		gameObject.GetComponent<Renderer>().enabled = false;
+	public void Killed(){
+		isKilled = true;
+		this.gameObject.GetComponent<Renderer>().enabled = false;
 	}
 }
